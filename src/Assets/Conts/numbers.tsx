@@ -1,0 +1,1 @@
+export const initialArrayLength: number = 0;
