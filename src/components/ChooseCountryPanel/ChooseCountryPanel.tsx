@@ -8,9 +8,15 @@ import { Grid, TextField, Button } from "./ChooseCountryPanel.style";
 const ChooseCountryPanel = ({ countries, handleChange, currentValue, submitFunc }: ICountryPanelProps) => {
   useEffect(() => {
     countries.sort(function(a: ICountries, b: ICountries) {
-      if (a.Country < b.Country) return -1;
-      if (a.Country > b.Country) return 1;
-      return 0;
+      if (a.Country < b.Country) {
+        return -1
+      }
+      else if (a.Country > b.Country) {
+        return 1
+      }
+      else {
+        return 0
+      }
     });
   });
   return (
@@ -18,15 +24,18 @@ const ChooseCountryPanel = ({ countries, handleChange, currentValue, submitFunc 
       <Grid item xs={12}>
         <TextField
           select
-          label="Native select"
+          label="Select country"
           value={currentValue}
           onChange={handleChange}
           SelectProps={{
             native: true,
           }}
-          helperText="Please select your currency"
+          helperText="Please select country"
           variant="outlined"
         >
+          <option value="">
+
+          </option>
           {countries.map((option: ICountries) => (
             <option key={option.ISO2} value={option.Slug}>
               {option.Country}

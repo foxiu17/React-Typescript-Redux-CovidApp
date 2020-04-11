@@ -23,16 +23,15 @@ import Table from "../../components/Table";
 import { Container, Grid } from "./App.style";
 
 function App(): JSX.Element {
-  const [currentValue, setCurrentValue] = useState<string>("Poland");
   const { state, dispatch } = useContext(Store);
+  const [currentValue, setCurrentValue] = useState<string>('');
 
   const handleChange = (event: FormElement): void => {
     setCurrentValue(event.currentTarget.value);
   };
 
   const fetchSummaryByCountry = async () => {
-    const country: string = currentValue.toLowerCase();
-    const data: AxiosResponse = await axios.get(`${fetchByCountryTotal}/${country}/status/confirmed`);
+    const data: AxiosResponse = await axios.get(`${fetchByCountryTotal}/${currentValue}/status/confirmed`);
     FETCH_BY_COUNTRY(data, dispatch);
   };
 
@@ -46,10 +45,11 @@ function App(): JSX.Element {
     FETCH_COUNTRIES(data, dispatch);
   };
 
+  console.log('current value: ', currentValue);
   useEffect(() => {
     state.allData.length === initialArrayLength && fetchSummaryData();
     state.countries.length === initialArrayLength && fetchCountries();
-  });
+  }, );
 
   console.log('context: ', state);
   return (
