@@ -7,7 +7,7 @@ import { Store } from '../../Context/Store';
 import { FETCH_SUMMARY, FETCH_BY_COUNTRY, FETCH_COUNTRIES } from "../../Actions/MainActions";
 
 // const
-import { fetchSummary, fetchByCountryTotal } from "../../Assets/Conts/fetchURL";
+import { fetchSummary, fetchByCountryTotal, fetchCountries as fetchCountriesURL } from "../../Assets/Conts/fetchURL";
 import { initialArrayLength } from "../../Assets/Conts/numbers";
 
 // interfaces and types
@@ -31,24 +31,24 @@ function App(): JSX.Element {
   };
 
   const fetchSummaryByCountry = async () => {
-    const country = currentValue.toLowerCase();
+    const country: string = currentValue.toLowerCase();
     const data: AxiosResponse = await axios.get(`${fetchByCountryTotal}/${country}/status/confirmed`);
-    dispatch({
-      type: "FETCH_COVID_BY_COUNTRY",
-      payload: data
-    });
+    FETCH_BY_COUNTRY(data, dispatch);
   };
 
   const fetchSummaryData = async () => {
     const data: AxiosResponse = await axios.get(fetchSummary);
-    dispatch({
-      type: "FETCH_COVID_SUMMARY",
-      payload: data.data
-    });
+    FETCH_SUMMARY(data.data, dispatch);
+  };
+
+  const fetchCountries = async () => {
+    const data: AxiosResponse = await axios.get(fetchCountriesURL);
+    FETCH_COUNTRIES(data, dispatch);
   };
 
   useEffect(() => {
     state.allData.length === initialArrayLength && fetchSummaryData();
+    state.countries.length === initialArrayLength && fetchCountries();
   });
 
   console.log('context: ', state);
@@ -68,9 +68,11 @@ function App(): JSX.Element {
             </Grid>
           </>
         )}
-        <Grid item xs={12}>
-          <ChooseCountryPanel handleChange={handleChange} currentValue={currentValue} submitFunc={fetchSummaryByCountry}/>
-        </Grid>
+        {state.countries.length !== initialArrayLength && (
+          <Grid item xs={12}>
+            <ChooseCountryPanel countries={state.countries.data} handleChange={handleChange} currentValue={currentValue} submitFunc={fetchSummaryByCountry}/>
+          </Grid>
+        )}
         {state.countryData.length !== initialArrayLength && (
           <Grid item xs={12}>
             <Table data={state.countryData.data}/>

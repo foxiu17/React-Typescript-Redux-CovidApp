@@ -14,7 +14,6 @@ import {
 
 const Table = ({ data }: ITable): JSX.Element => {
 
-  console.log("TABELA: ", data);
   return (
     <Paper elevation={3}>
       <TableWrapper size="small" aria-label="a dense table">

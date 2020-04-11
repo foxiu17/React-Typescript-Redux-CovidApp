@@ -1,17 +1,18 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import { ICountryPanelProps } from "../../Interfaces/Interfaces";
+import { ICountries } from "../../Interfaces/FetchedDataInterfaces";
 
 import { Grid, TextField, Button } from "./ChooseCountryPanel.style";
 
-const countries = [
-  { value: "Poland", label: "Poland" },
-  { value: "Germany", label: "Germany"},
-  { value: "Italy", label: "Italy"},
-  { value: "Spain", label: "Spain"}
-];
-
-const ChooseCountryPanel = ({ handleChange, currentValue, submitFunc }: ICountryPanelProps) => {
+const ChooseCountryPanel = ({ countries, handleChange, currentValue, submitFunc }: ICountryPanelProps) => {
+  useEffect(() => {
+    countries.sort(function(a: ICountries, b: ICountries) {
+      if (a.Country < b.Country) return -1;
+      if (a.Country > b.Country) return 1;
+      return 0;
+    });
+  });
   return (
     <Grid container>
       <Grid item xs={12}>
@@ -26,9 +27,9 @@ const ChooseCountryPanel = ({ handleChange, currentValue, submitFunc }: ICountry
           helperText="Please select your currency"
           variant="outlined"
         >
-          {countries.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
+          {countries.map((option: ICountries) => (
+            <option key={option.ISO2} value={option.Slug}>
+              {option.Country}
             </option>
           ))}
         </TextField>

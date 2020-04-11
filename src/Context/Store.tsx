@@ -1,7 +1,6 @@
 import React, { createContext, useReducer } from "react";
 
 import { IInitialState, IActionType } from "../Interfaces/StoreInterfaces";
-import {act} from "react-dom/test-utils";
 
 const initialState: IInitialState = {
   allData: [],
