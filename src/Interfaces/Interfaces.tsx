@@ -6,3 +6,9 @@ export interface ICountryPanelProps {
   submitFunc: FormEvent;
   currentValue: string;
 }
+
+export interface ITextPanelProps {
+  color?: string;
+  title?: string;
+  count?: number;
+}

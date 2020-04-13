@@ -2,11 +2,7 @@ import React from "react";
 
 import { Grid } from './TextPanel.style';
 
-interface ITextPanelProps {
-  color: string;
-  title: string;
-  count: number;
-}
+import { ITextPanelProps } from "../../Interfaces/Interfaces";
 
 const TextPanel = ({ color, title, count }: ITextPanelProps) => {
   return (

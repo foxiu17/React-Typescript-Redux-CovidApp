@@ -6,8 +6,11 @@ export interface IRow {
   Confirmed: number;
   Deaths: number;
   Recovered: number;
+  Province: string;
+  City: string;
+  CityCode: string;
   Active: number;
-  Date: Date;
+  Date: string;
   CountryCode: string;
   Country: string;
   Lat: string;

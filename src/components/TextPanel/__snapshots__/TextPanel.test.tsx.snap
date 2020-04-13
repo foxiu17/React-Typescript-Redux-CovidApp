@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test TextPanel component Render tests Render component without crashing - with props 1`] = `ShallowWrapper {}`;
+
+exports[`Test TextPanel component Render tests Render component without crashing - without props 1`] = `ShallowWrapper {}`;

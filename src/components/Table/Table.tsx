@@ -13,7 +13,7 @@ import {
 } from './Table.style';
 
 const Table = ({ data }: ITable): JSX.Element => {
-
+  console.log('tabela', data);
   return (
     <Paper elevation={3}>
       <TableWrapper size="small" aria-label="a dense table">
