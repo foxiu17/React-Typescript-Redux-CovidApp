@@ -6,19 +6,20 @@ import { ICountries } from "../../Interfaces/FetchedDataInterfaces";
 import { Grid, TextField, Button } from "./ChooseCountryPanel.style";
 
 const ChooseCountryPanel = ({ countries, handleChange, currentValue, submitFunc }: ICountryPanelProps) => {
+  const sortCountries = (a: ICountries, b: ICountries) => {
+    if (a.Country < b.Country) {
+      return -1;
+    } else if (a.Country > b.Country) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+
   useEffect(() => {
-    countries.sort(function(a: ICountries, b: ICountries) {
-      if (a.Country < b.Country) {
-        return -1
-      }
-      else if (a.Country > b.Country) {
-        return 1
-      }
-      else {
-        return 0
-      }
-    });
-  });
+    countries.sort(sortCountries);
+  },[countries]);
+
   return (
     <Grid container>
       <Grid item xs={12}>
