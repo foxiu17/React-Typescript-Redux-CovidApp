@@ -1,10 +1,8 @@
 import React from "react";
 
-import { Container, Grid, Title, Subtitle } from "./Headline.style";
+import { IHeadlineProps } from "../../Interfaces/Interfaces";
 
-interface IHeadlineProps {
-  totalCount?: number
-}
+import { Container, Grid, Title, Subtitle } from "./Headline.style";
 
 const Headline = ({ totalCount }: IHeadlineProps) => {
   return (
