@@ -1,13 +1,10 @@
 import styled from 'styled-components';
 
+import { IGridProps } from "../../Interfaces/Styles/StylesInterfaces";
+
 import { Grid as commonGrid } from '../../Assets/Common/Containers.style';
 
-interface GetStyleProps {
-  readonly color?: string;
-}
-
-export const Grid = styled(commonGrid)<GetStyleProps>`
+export const Grid = styled(commonGrid)<IGridProps>`
   width: 100%;
   height: 100%;
-  background-color: ${props => props.color ? props.color : 'inherit'};
 `;
