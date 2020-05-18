@@ -11,6 +11,7 @@ export interface ITextPanelProps {
   color?: string;
   title?: string;
   count?: number;
+  status?: string;
 }
 
 export interface IHeadlineProps {

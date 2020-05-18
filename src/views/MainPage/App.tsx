@@ -2,9 +2,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import axios, { AxiosResponse } from 'axios';
 
 import { Store } from '../../Context/Store';
+import { Theme } from '../../Context/ThemeContext';
 
 // actions
-import { FETCH_SUMMARY, FETCH_BY_COUNTRY, FETCH_COUNTRIES } from "../../Actions/MainActions";
+import { FETCH_SUMMARY, FETCH_BY_COUNTRY, FETCH_COUNTRIES, SWITCH_THEME_NIGHT } from "../../Actions/MainActions";
 
 // const
 import { fetchSummary, fetchByCountryTotal, fetchCountries as fetchCountriesURL } from "../../Assets/Conts/fetchURL";
@@ -27,10 +28,16 @@ import CovidBg from "../../Assets/Images/Backgrounds/covid-bg.jpg";
 
 function App(): JSX.Element {
   const { state, dispatch } = useContext(Store);
+  const { state: themeState, dispatch: themeDispatch } = useContext(Theme);
   const [currentValue, setCurrentValue] = useState<string>('');
 
+  console.log('THEME: ', themeState);
   const handleChange = (event: FormElement): void => {
     setCurrentValue(event.currentTarget.value);
+  };
+
+  const handleChangeTheme = (): void => {
+    SWITCH_THEME_NIGHT('night', themeDispatch);
   };
 
   const fetchSummaryByCountry = async () => {
@@ -48,13 +55,11 @@ function App(): JSX.Element {
     FETCH_COUNTRIES(data, dispatch);
   };
 
-  console.log('current value: ', currentValue);
   useEffect(() => {
     state.allData.length === initialArrayLength && fetchSummaryData();
     state.countries.length === initialArrayLength && fetchCountries();
   }, );
 
-  console.log('context: ', state);
   return (
     <Container maxWidth="xl" disableGutters>
       <Grid container justify="center">
@@ -65,11 +70,11 @@ function App(): JSX.Element {
                 <Grid item xs={12}>
                   <Headline totalCount={state.allData.Global.TotalConfirmed} />
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextPanel title="Total death" count={state.allData.Global.TotalDeaths}/>
+                <Grid item xs={12} sm={2}>
+                  <TextPanel title="Total death" count={state.allData.Global.TotalDeaths} status="death"/>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextPanel title="Total overcame" count={state.allData.Global.TotalRecovered}/>
+                <Grid item xs={12} sm={2}>
+                  <TextPanel title="Total overcame" count={state.allData.Global.TotalRecovered} status="overcame"/>
                 </Grid>
               </>
             )}
@@ -77,6 +82,9 @@ function App(): JSX.Element {
         </Grid>
         <Grid item xs={12} section="true">
           <Grid container justify="center">
+            <Grid item xs={12}>
+              <button type="button" onClick={handleChangeTheme}>Theme</button>
+            </Grid>
             {state.countries.length !== initialArrayLength && (
               <Grid item xs={12}>
                 <ChooseCountryPanel countries={state.countries.data} handleChange={handleChange} currentValue={currentValue} submitFunc={fetchSummaryByCountry}/>

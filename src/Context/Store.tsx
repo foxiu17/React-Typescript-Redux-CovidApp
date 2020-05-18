@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from "react";
 
-import { IInitialState, IActionType } from "../Interfaces/StoreInterfaces";
+import { IInitialState, IActionType } from "../Interfaces/ContextInterfaces";
 
 const initialState: IInitialState = {
   allData: [],
@@ -34,4 +34,4 @@ function Reducers(state: IInitialState, action: IActionType): IInitialState {
 export function StoreProvider(props: any): JSX.Element {
   const [state, dispatch] = useReducer(Reducers, initialState);
   return <Store.Provider value={{ state, dispatch }}>{props.children}</Store.Provider>;
-};
+}

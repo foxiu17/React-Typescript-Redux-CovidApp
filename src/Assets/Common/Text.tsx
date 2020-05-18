@@ -14,6 +14,14 @@ export const SubTitle = styled.h2`
   z-index: 100;
 `;
 
+export const Paragraph = styled.p`
+  color: #fff;
+`;
+
+export const Icon = styled.span`
+  vertical-align: middle;
+`;
+
 export const Text = styled(UI_TYPOGRAPHY)`
   color: #fff;
   font-size: 24px;

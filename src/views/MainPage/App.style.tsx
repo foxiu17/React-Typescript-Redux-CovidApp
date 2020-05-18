@@ -11,6 +11,7 @@ export const Container = styled(commonBlockContainer)`
 export const Grid = styled(commonGrid)<IGridProps>`
   position: relative;
   min-height: ${props => props.section === 'true' ? '100vh' : 'auto'};
+  padding: ${props => props.section === 'true' ? '30px 0 10px' : 'auto'};
   background-image: ${props => props.image ? `url(${props.image})` : ''};
   background-size: cover;
   background-position: center center;
